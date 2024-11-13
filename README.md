@@ -173,6 +173,7 @@ public class BaseClass {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("deviceName", "YOUR_DEVICE_NAME");
+        capabilities.setCapability("deviceName", "<Your Device uid>");
         capabilities.setCapability("appPackage", "com.example.mbl");
         capabilities.setCapability("appActivity", "com.example.mbl.MainActivity");
 
