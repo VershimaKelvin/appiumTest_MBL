@@ -32,8 +32,7 @@ public class SignupTest extends BaseClass {
             WebElement passwordField = locateElementWithRetry(wait, AppiumBy.xpath("//android.widget.EditText[2]"));
             WebElement confirmPassword = locateElementWithRetry(wait, AppiumBy.xpath("//android.widget.EditText[3]"));
 
-            confirmPassword.sendKeys("ddfdssff");
-            System.out.println("Loaded confirm password");
+           
 
             // Attempt to interact with the signup button
             WebElement signupButton = locateElementWithRetry(wait, By.xpath("//android.view.View[@content-desc=\"Register\"]"));

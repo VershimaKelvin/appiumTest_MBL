@@ -13,6 +13,10 @@ public class BaseClass {
 
     public void setup() {
         try {
+        	
+        	//Here you will find the capabilities, change the udid to that of your device
+        	//also change the device name to that of your device also
+        	
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("appium:appActivity", "com.example.mbl.MainActivity");
             capabilities.setCapability("appium:appPackage", "com.example.mbl");
@@ -22,6 +26,7 @@ public class BaseClass {
             capabilities.setCapability("appium:udid", "192.168.1.101:5555");
            // capabilities.setCapability("newCommandTimeout", 200);
 
+            //unless you are using another port other than the default this should remain the same
             driver = new AndroidDriver(new URL("http://127.0.0.1:4723/"), capabilities);
             System.out.println("Application started");
         } catch (MalformedURLException e) {

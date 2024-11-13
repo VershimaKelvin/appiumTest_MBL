@@ -18,7 +18,7 @@ public class LoginTest extends BaseClass {
 
     @Before
     public void setUp() throws Exception {
-        setup(); // Initialize driver from BaseClass
+        setup(); 
     }
 
     @Test
@@ -26,19 +26,18 @@ public class LoginTest extends BaseClass {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(100));
 
         try {
-            // Locate and enter username
+            // Locate and enter userName
             WebElement usernameField = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     AppiumBy.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.widget.EditText[1]")));
             usernameField.click();
             driver.executeScript("mobile: performEditorAction", 
             	    ImmutableMap.of("action", "setText", "text", "vershimakelvin"));
             usernameField.clear();
+            
+            //You can change the key here to whatever userName you want to use
             usernameField.sendKeys("vershimakelvin");
             System.out.println("Username added");
 
-         
-           
-            System.out.println(usernameField.getText());
          
 
             // Locate and enter password
@@ -48,11 +47,11 @@ public class LoginTest extends BaseClass {
             driver.executeScript("mobile: performEditorAction", 
             	    ImmutableMap.of("action", "setText", "text", "12345678"));
             passwordField.click();
+            
+            //You can change the key here to the password of the account
             passwordField.sendKeys("12345678");
             System.out.println("Password added");
 
-
-            System.out.println(passwordField.getText());
          
             // Locate and click the login button
             WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(
@@ -63,6 +62,7 @@ public class LoginTest extends BaseClass {
             loginButton.click();
             System.out.println("Clicked login button.");
 
+            
             // Wait until the login button is no longer visible, indicating navigation to the next screen
             wait.until(ExpectedConditions.invisibilityOfElementLocated(
                     AppiumBy.xpath("//android.view.View[@content-desc='Login']")));
