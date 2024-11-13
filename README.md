@@ -22,7 +22,7 @@ To setup your testing environment follow the steps below. if you run into errors
 2. **Android SDK**
    - Install the Android SDK, which can be done via Android Studio.
    - Add Android SDK's `platform-tools` and `tools` to your system path. The path usually looks like this
-     platform tools
+      platform tools
      ```bash
      C:\Users\Admin\AppData\Local\Android\Sdk\platform-tools
      ```
@@ -91,16 +91,21 @@ To setup your testing environment follow the steps below. if you run into errors
      ```java
      capabilities.setCapability("platformName", "Android");
      capabilities.setCapability("deviceName", "<Your Device Name>");
-     capabilities.setCapability("appPackage", "<Your App Package>");
-     capabilities.setCapability("appActivity", "<Your App Activity>");
+     capabilities.setCapability("deviceName", "<Your Device uid>");
+     capabilities.setCapability("appPackage", "com.example.mbl");
+     capabilities.setCapability("appActivity", "com.example.mbl.MainActivity");
      ```
+     - to get your device uid, connect your android device and run the command in terminal
+        ```bash
+         adb devices 
+        ```
+      - you should get a list of connected devices, the number by the left is your device uid
 
 4. **Start Appium Server**
    - Start the Appium server by running:
      ```bash
      appium
      ```
-   - Alternatively, you can start Appium Desktop and click on "Start Server".
 
 ---
 
