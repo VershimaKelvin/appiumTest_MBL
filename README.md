@@ -1,6 +1,6 @@
 # MBL QA Task Test Setup and Execution Guide
 
-This guide will walk you through the process of setting up and running the Appium tests for this project. Follow each step carefully to ensure that the tests are set up correctly on your device. You will need the apk installed on your real device. You can build the apk from this repo [QA Task App Repo](https://appium.io/docs/en/about-appium/intro/) instructions on how to build the apk can be found in the Readme section of the repo. Also we will be using an Android real device to run our test.
+This guide will walk you through the process of setting up and running the Appium tests for this project. Follow each step carefully to ensure that the tests are set up correctly on your device. You will need the apk installed on your real device. You can build the apk from this repo [QA Task App Repo](https://appium.io/docs/en/about-appium/intro/) instructions on how to build the apk can be found in the Readme section of the repo or you can get it download it from my drive [here](https://drive.google.com/file/d/1oQbO19sI-BkA6EQFxR35cp6sC2s6QRkS/view?usp=sharing) Also we will be using an Android real device to run our test.
 
 ---
 
