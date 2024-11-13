@@ -1,13 +1,15 @@
-# Appium Test Setup and Execution Guide
+# MBL QA Task Test Setup and Execution Guide
 
-This guide will walk you through the process of setting up and running the Appium tests for this project. Follow each step carefully to ensure that the tests are set up correctly on your device.
+This guide will walk you through the process of setting up and running the Appium tests for this project. Follow each step carefully to ensure that the tests are set up correctly on your device. You will need the apk installed on your real device. You can build the apk from this repo [QA Task App Repo](https://appium.io/docs/en/about-appium/intro/) instructions on how to build the apk can be found in the Readme section of the repo.
 
 ---
 
 ## Prerequisites
+To setup your testing environment follow the steps below. if you run into errors while setting up your testing environment please refer to this youtube playlist for a more detailed walkthrouh [here]([https://appium.io/docs/en/about-appium/intro/](https://www.youtube.com/playlist?list=PLhW3qG5bs-L8npSSZD6aWdYFQ96OEduhk))
 
 1. **Java Development Kit (JDK)**
    - Ensure you have **JDK 8 or later** installed.
+   - Add the path to the JDK bin in your environment variables.
    - Verify Java installation by running:
      ```bash
      java -version
@@ -31,7 +33,6 @@ This guide will walk you through the process of setting up and running the Appiu
      ```bash
      appium -v
      ```
-   - Appium Desktop is optional but recommended for inspecting elements. You can download it [here](https://appium.io/downloads.html).
 
 4. **Appium Inspector (Optional)**
    - For inspecting and identifying elements, download Appium Inspector from [here](https://github.com/appium/appium-inspector).
