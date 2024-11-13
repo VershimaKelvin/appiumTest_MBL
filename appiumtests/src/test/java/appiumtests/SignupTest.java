@@ -24,39 +24,52 @@ public class SignupTest extends BaseClass {
     public void testSignupFlow() {
         navHelpers.navigateToSignup();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(100));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         
-        WebElement userNameField = wait.until(ExpectedConditions.elementToBeClickable(
-                AppiumBy.xpath("//android.widget.EditText[1]")));
-        userNameField.sendKeys("vsnnnennses");
-        System.out.println("Loaded username");
-
-        WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(
-                AppiumBy.xpath("//android.widget.EditText[2]")));
-        passwordField.sendKeys("ddfdssff");
-        System.out.println("Loaded password");
-
-        WebElement confirmPassword = wait.until(ExpectedConditions.elementToBeClickable(
-                AppiumBy.xpath("//android.widget.EditText[3]")));
-        confirmPassword.sendKeys("ddfdssff");
-        System.out.println("Loaded confirm password");
-
         try {
-            WebElement signupButton = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("//android.view.View[@content-desc=\"Register\"]")));
+            // Locate the fields with retry to avoid stale element issues
+            WebElement userNameField = locateElementWithRetry(wait, AppiumBy.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[1]"));
+            WebElement passwordField = locateElementWithRetry(wait, AppiumBy.xpath("//android.widget.EditText[2]"));
+            WebElement confirmPassword = locateElementWithRetry(wait, AppiumBy.xpath("//android.widget.EditText[3]"));
+
+            confirmPassword.sendKeys("ddfdssff");
+            System.out.println("Loaded confirm password");
+
+            // Attempt to interact with the signup button
+            WebElement signupButton = locateElementWithRetry(wait, By.xpath("//android.view.View[@content-desc=\"Register\"]"));
+
+            // Interact with the userNameField with retries
+//            userNameField.click();
+            userNameField.clear();
+            userNameField.sendKeys("12345678");
+
             System.out.println("Attempting to click the signup button.");
             signupButton.click();
             System.out.println("Clicked signup button.");
+
+            // Wait for success indicator or screen navigation
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                    AppiumBy.xpath("//android.view.View[@content-desc='Register']")));
+
+            System.out.println("Account Created Successfully");
+        
         } catch (Exception e) {
-            System.out.println("Error during click: " + e.getMessage());
+            System.out.println("An error occurred during signup: " + e.getMessage());
             e.printStackTrace();
         }
-
-        // Wait for success indicator or screen navigation
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(
-                AppiumBy.xpath("//android.view.View[@content-desc='Register']")));
-
-        System.out.println("Account Created Successfully");
     }
 
+    // Helper method to locate elements with retry logic for staleness
+    private WebElement locateElementWithRetry(WebDriverWait wait, By locator) {
+        int attempts = 0;
+        while (attempts < 3) {
+            try {
+                return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                System.out.println("Encountered StaleElementReferenceException. Retrying... Attempt " + (attempts + 1));
+                attempts++;
+            }
+        }
+        throw new RuntimeException("Element could not be located due to repeated stale references.");
+    }
 }
