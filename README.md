@@ -1,6 +1,6 @@
 # MBL QA Task Test Setup and Execution Guide
 
-This guide will walk you through the process of setting up and running the Appium tests for this project. Follow each step carefully to ensure that the tests are set up correctly on your device. You will need the apk installed on your real device. You can build the apk from this repo [QA Task App Repo](https://appium.io/docs/en/about-appium/intro/) instructions on how to build the apk can be found in the Readme section of the repo.
+This guide will walk you through the process of setting up and running the Appium tests for this project. Follow each step carefully to ensure that the tests are set up correctly on your device. You will need the apk installed on your real device. You can build the apk from this repo [QA Task App Repo](https://appium.io/docs/en/about-appium/intro/) instructions on how to build the apk can be found in the Readme section of the repo. Also we will be using an Android real device to run our test.
 
 ---
 
@@ -9,7 +9,10 @@ To setup your testing environment follow the steps below. if you run into errors
 
 1. **Java Development Kit (JDK)**
    - Ensure you have **JDK 8 or later** installed.
-   - Add the path to the JDK bin in your environment variables.
+   - Add the path to the JDK bin in your environment variables under PATH. The path should look like this
+     ```bash
+     C:\Program Files\Java\jdk-23\bin
+     ```
    - Verify Java installation by running:
      ```bash
      java -version
@@ -18,7 +21,15 @@ To setup your testing environment follow the steps below. if you run into errors
 
 2. **Android SDK**
    - Install the Android SDK, which can be done via Android Studio.
-   - Add Android SDK's `platform-tools` and `tools` to your system path.
+   - Add Android SDK's `platform-tools` and `tools` to your system path. The path usually looks like this
+     platform tools
+     ```bash
+     C:\Users\Admin\AppData\Local\Android\Sdk\platform-tools
+     ```
+     command-line tools
+     ```bash
+     C:\Users\Admin\AppData\Local\Android\Sdk\cmdline-tools\latest\bin
+     ```
    - Verify installation by running:
      ```bash
      adb version
@@ -45,9 +56,17 @@ To setup your testing environment follow the steps below. if you run into errors
      ```
    - If Maven is not installed, you can download and install it from [here](https://maven.apache.org/download.cgi).
 
-6. **Mobile Device or Emulator**
-   - A physical Android device with **Developer Mode** and **USB Debugging** enabled, or an Android emulator.
-   - For emulators, you can create one using Android Studio.
+6. **Mobile Device**
+   We will be using a real android device to run our test, so you will need to enable developer settings on your device
+   - Go to the Settings app on your Android device.
+   - Scroll down and tap on About phone (or About device in some devices).
+   - Find the Build number section. It's usually located at the bottom of the About phone section.
+   - Tap on Build number 7 times in quick succession. You may need to enter your device's PIN or password to confirm.
+   - After the seventh tap, you'll see a message that says: "You are now a developer!"
+   - Go back to the Settings screen.You will now see a new section called Developer options or System (depending on the Android version).
+   - Tap on Developer options and toggle the switch to enable it.
+   - Once enabled, you can configure various options, including USB debugging, Stay awake, OEM unlocking, and more.
+   - In the Developer options menu, find and enable USB debugging.
 
 ---
 
