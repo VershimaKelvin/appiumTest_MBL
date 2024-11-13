@@ -20,6 +20,7 @@ public class BaseClass {
             capabilities.setCapability("appium:deviceName", "TECNO SPARK 20");
             capabilities.setCapability("appium:platformVersion", "12");
             capabilities.setCapability("appium:udid", "192.168.1.101:5555");
+           // capabilities.setCapability("newCommandTimeout", 200);
 
             driver = new AndroidDriver(new URL("http://127.0.0.1:4723/"), capabilities);
             System.out.println("Application started");
@@ -30,9 +31,9 @@ public class BaseClass {
     }
 
 
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+//    public void tearDown() {
+//        if (driver != null) {
+//            driver.quit();
+//        }
+//    }
 }
