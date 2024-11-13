@@ -1,67 +1,59 @@
 package appiumtests;
 
 import io.appium.java_client.android.AndroidDriver;
-import org.junit.After;
-import org.junit.Assert;
+
 import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.Test;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.time.Duration;
-
-public class CreateItemTest extends BaseClass {
-
+public class CreateItemTest extends BaseClass{
+	
     private AndroidDriver driver;
-    private WebDriverWait wait;
+    private AppNavigationHelpers navHelpers;
     
+
     @Before
-    public void setUp() throws Exception {
-        setup(); // Initialize driver from BaseClass
+    public void setUp() {
+        super.setup();  // Call the setup method from BaseTest
+        navHelpers = new AppNavigationHelpers(driver);  // Initialize helper class
     }
 
-
+    
     @Test
-    public void testLogin() {
-    	 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(100));
-        enterUsername("testuser");
-        enterPassword("password123");
-        clickLogin();
+    public void testCreateItemScreen() {
+        // Locate elements
+        WebElement nameField = driver.findElement(By.xpath("//android.widget.EditText[@content-desc='Enter item name']"));
+        WebElement descriptionField = driver.findElement(By.xpath("//android.widget.EditText[@content-desc='Item description']"));
+        WebElement createButton = driver.findElement(By.xpath("//android.widget.Button[@text='Create Item']"));
 
-        // Assertion to verify successful login, e.g., checking a specific element is displayed
-        MobileElement homeScreenElement = (MobileElement) wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("homeScreenElementId"))
-        );
-        Assert.assertTrue("Login failed, home screen element not displayed.", homeScreenElement.isDisplayed());
+        // Verify that the "Create Item" button is initially disabled
+        Assert.assertFalse(createButton.isEnabled(), "Create Item button should be disabled initially.");
+
+        // Enter valid input into the Name field
+        nameField.sendKeys("Sample Item Name");
+
+        // Verify that the Create button is still disabled without description
+        Assert.assertFalse(createButton.isEnabled(), "Create Item button should be disabled if description is empty.");
+
+        // Enter valid input into the Description field
+        descriptionField.sendKeys("This is a sample item description.");
+
+        // Verify that the Create button is enabled after valid inputs
+        Assert.assertTrue(createButton.isEnabled(), "Create Item button should be enabled after valid input.");
+
+        // Tap the "Create Item" button
+        createButton.click();
+
+        // Verify the item creation was successful - for example, checking for a confirmation message
+        WebElement successMessage = driver.findElement(By.xpath("//android.widget.TextView[@text='Item created successfully']"));
+        Assert.assertTrue(successMessage.isDisplayed(), "Success message should appear after item creation.");
     }
 
-    public void enterUsername(String username) {
-        MobileElement usernameField = (MobileElement) wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("usernameFieldId"))
-        );
-        usernameField.sendKeys(username);
-    }
-
-    public void enterPassword(String password) {
-        MobileElement passwordField = (MobileElement) wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("passwordFieldId"))
-        );
-        passwordField.sendKeys(password);
-    }
-
-    public void clickLogin() {
-        MobileElement loginButton = (MobileElement) wait.until(
-                ExpectedConditions.elementToBeClickable(By.id("loginButtonId"))
-        );
-        loginButton.click();
-    }
-
-    @After
-    public void tearDown() {
+    @AfterClass
+    public void teardown() {
         if (driver != null) {
             driver.quit();
         }

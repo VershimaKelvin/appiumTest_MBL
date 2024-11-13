@@ -30,10 +30,4 @@ public class BaseClass {
         }
     }
 
-
-//    public void tearDown() {
-//        if (driver != null) {
-//            driver.quit();
-//        }
-//    }
 }
