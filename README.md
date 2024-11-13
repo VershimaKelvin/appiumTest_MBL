@@ -5,7 +5,7 @@ This guide will walk you through the process of setting up and running the Appiu
 ---
 
 ## Prerequisites
-To setup your testing environment follow the steps below. if you run into errors while setting up your testing environment please refer to this youtube playlist for a more detailed walkthrouh [here]([https://appium.io/docs/en/about-appium/intro/](https://www.youtube.com/playlist?list=PLhW3qG5bs-L8npSSZD6aWdYFQ96OEduhk)
+To setup your testing environment follow the steps below. if you run into errors while setting up your testing environment please refer to this youtube playlist for a more detailed walkthrouh [here](https://www.youtube.com/playlist?list=PLhW3qG5bs-L8npSSZD6aWdYFQ96OEduhk)
 
 1. **Java Development Kit (JDK)**
    - Ensure you have **JDK 8 or later** installed.
