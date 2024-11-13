@@ -56,7 +56,11 @@ To setup your testing environment follow the steps below. if you run into errors
      ```
    - If Maven is not installed, you can download and install it from [here](https://maven.apache.org/download.cgi).
 
-6. **Mobile Device**
+6. **Eclipse IDE**
+   - Download and install Eclipse IDE
+   - Make all necessary configurations and foloow setup as prompted
+     
+7. **Mobile Device**
    We will be using a real android device to run our test, so you will need to enable developer settings on your device
    - Go to the Settings app on your Android device.
    - Scroll down and tap on About phone (or About device in some devices).
@@ -87,7 +91,7 @@ To setup your testing environment follow the steps below. if you run into errors
 
 3. **Configure Desired Capabilities**
    - Update the `BaseClass.java` file to set up the correct **desired capabilities** for your device or emulator.
-   - Example configuration for an Android device:
+   - I have done the key configurations, only change where i am specified as <Your device> 
      ```java
      capabilities.setCapability("platformName", "Android");
      capabilities.setCapability("deviceName", "<Your Device Name>");
@@ -112,22 +116,26 @@ To setup your testing environment follow the steps below. if you run into errors
 ## Running Tests
 
 1. **Connect Your Device**
-   - Connect your Android device to your computer via USB or ensure your emulator is running.
+   - Connect your Android device to your computer via USB
    - Verify that the device is detected by running:
      ```bash
      adb devices
      ```
    - You should see your device listed as connected.
-
-2. **Run the Tests**
-   - To run the tests, execute the following command:
+  
+2. **Start Appium server
+   - Start the Appium server by running:
      ```bash
-     mvn test
+     appium
      ```
 
-3. **View Test Results**
+3. **Run the Tests**
+   - Open Eclipse IDE and open the folder cloned
+   - I have created diffrent files to handle test for diffrent features like login, signup, create item etc
+   - You can run test for a particular feature by opening the file of that feature and click run on your eclipse IDE
+
+4. **View Test Results**
    - Test results will be displayed in the console.
-   - Detailed reports (if configured) will be available in the `target/surefire-reports` directory after the tests complete.
 
 ---
 
@@ -135,7 +143,6 @@ To setup your testing environment follow the steps below. if you run into errors
 
 - **Common Issues**:
   - If you encounter `StaleElementReferenceException`, refer to the codebase for retry mechanisms or increase the wait time in `WebDriverWait`.
-  - Ensure that the `appPackage` and `appActivity` values in `BaseClass.java` are accurate and match the application being tested.
   - If Appium doesn’t detect your device, make sure **USB Debugging** is enabled on the device and run `adb devices` to verify the connection.
 
 ---
@@ -166,8 +173,8 @@ public class BaseClass {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformName", "Android");
         capabilities.setCapability("deviceName", "YOUR_DEVICE_NAME");
-        capabilities.setCapability("appPackage", "YOUR_APP_PACKAGE");
-        capabilities.setCapability("appActivity", "YOUR_APP_ACTIVITY");
+        capabilities.setCapability("appPackage", "com.example.mbl");
+        capabilities.setCapability("appActivity", "com.example.mbl.MainActivity");
 
         try {
             driver = new AndroidDriver<>(new URL("http://localhost:4723/wd/hub"), capabilities);
@@ -182,3 +189,5 @@ public class BaseClass {
         }
     }
 }
+```
+Incase of a blocker, reach out to me via whatsapp +2349061140728 or kelvinityavyar@gmail.com
