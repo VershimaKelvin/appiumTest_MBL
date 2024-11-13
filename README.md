@@ -191,4 +191,5 @@ public class BaseClass {
     }
 }
 ```
+Note: xPath often conflict accross different android API versions. I used Android 12 when locating elements, if you run into erros such as an element can not be located you can start by inspecting the element using appium inspector and change the xPath.
 Incase of a blocker, reach out to me via whatsapp +2349061140728 or kelvinityavyar@gmail.com
