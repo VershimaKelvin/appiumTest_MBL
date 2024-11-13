@@ -9,7 +9,9 @@ import org.junit.Test;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import io.appium.java_client.android.AndroidDriver; 
+import io.appium.java_client.clipboard.ClipboardContentType;
+import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumBy;
 
 public class LoginTest extends BaseClass {
@@ -26,39 +28,38 @@ public class LoginTest extends BaseClass {
         try {
             // Locate and enter username
             WebElement usernameField = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    AppiumBy.xpath("//android.widget.EditText[1]")));
+                    AppiumBy.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.widget.EditText[1]")));
+            usernameField.click();
+            driver.executeScript("mobile: performEditorAction", 
+            	    ImmutableMap.of("action", "setText", "text", "vershimakelvin"));
+            usernameField.clear();
             usernameField.sendKeys("vershimakelvin");
             System.out.println("Username added");
 
-            // Validate username entry
-            String enteredUsername = usernameField.getText();
-            if (!"vershimakelvin".equals(enteredUsername)) {
-                System.out.println("Username entry failed, retrying...");
-                usernameField.clear();
-                usernameField.sendKeys("vershimakelvin");
-            }
-            
+         
+           
             System.out.println(usernameField.getText());
+         
 
             // Locate and enter password
             WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    AppiumBy.xpath("//android.widget.EditText[2]")));
+                    AppiumBy.xpath("//android.widget.FrameLayout[@resource-id=\"android:id/content\"]/android.widget.FrameLayout/android.view.View/android.view.View/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.widget.EditText[2]")));
+            usernameField.click();
+            driver.executeScript("mobile: performEditorAction", 
+            	    ImmutableMap.of("action", "setText", "text", "12345678"));
+            passwordField.click();
             passwordField.sendKeys("12345678");
             System.out.println("Password added");
 
-            // Validate password entry
-            String enteredPassword = passwordField.getText();
-            if (!"12345678".equals(enteredPassword)) {
-                System.out.println("Password entry failed, retrying...");
-                passwordField.clear();
-                passwordField.sendKeys("12345678");
-            }
+
             System.out.println(passwordField.getText());
          
             // Locate and click the login button
             WebElement loginButton = wait.until(ExpectedConditions.elementToBeClickable(
                     AppiumBy.xpath("//android.view.View[@content-desc=\"Login\"]")));
             System.out.println("Attempting to click the login button.");
+            System.out.println(passwordField.getText());
+            System.out.println(usernameField.getText());
             loginButton.click();
             System.out.println("Clicked login button.");
 
